@@ -1,4 +1,16 @@
-﻿<div class="container body-content">
+﻿@{ 
+    string radioDefault;
+    if (ViewBag.searchType == null)
+    {
+        radioDefault = "all";
+    }
+    else
+    {
+        radioDefault = ViewBag.searchType;
+    }
+}
+
+<div class="container body-content">
 
     <h1>@ViewBag.title</h1>
 
@@ -8,8 +20,18 @@
         <p>
             @foreach (var column in ViewBag.columns)
             {
+
+
                 <span>
-                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked="@column.Key == 'all'" />
+                    @if (column.Key == radioDefault) 
+                    {
+                        <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked/>
+                    }
+                    else
+                    {
+                        <input type="radio" name="searchType" id="@column.Key" value="@column.Key" />
+                    }
+
                     <label for="@column.Key">@column.Value</label>
                 </span>
             }
