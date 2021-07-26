@@ -5,6 +5,24 @@
     @{
         //TODO #1: Use a loop to display job results in a table.
     }
+    <table class="job-listing">
+        <tr>
+            <th>ID</th>
+            <th>Event</th>
+            <th>Description</th>
+            <th>Edit</th>
+        </tr>
+        @foreach (var job in ViewBag.jobs)
+        {
+            <tr>
+                <td>@evt.Id</td>
+                <td>@evt.Name</td>
+                <td>@evt.Description</td>
+                <td><a asp-controller="Events" asp-action="Edit" asp-route-eventId="@evt.Id">Edit</a></td>
+            </tr>
+
+        }
+    </table>
 
 
 </div>
