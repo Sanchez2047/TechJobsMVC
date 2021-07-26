@@ -23,6 +23,7 @@ namespace TechJobsMVC.Controllers
         // TODO #3: Create an action method to process a search request and render the updated search view. 
         //[HttpPost]
         //[Route("/Search/Index")] 
+        [Route("/Search/Results/{searchType?}/{searchTerm?}")]
         public IActionResult Results(string searchType, string searchTerm)
         {
             List<Job> jobs;
@@ -32,7 +33,12 @@ namespace TechJobsMVC.Controllers
             }
             else
             {
-                jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+                string newSearchTerm = searchTerm;
+                if (newSearchTerm.Contains("%2F"))
+                {
+                    newSearchTerm = newSearchTerm.Replace("%2F", "/");
+                }
+                jobs = JobData.FindByColumnAndValue(searchType, newSearchTerm);
             }
             ViewBag.jobs = jobs;
             ViewBag.searchType = searchType;

@@ -41,9 +41,16 @@ namespace TechJobsMVC.Controllers
         }
 
         // list jobs by column and value
+        [Route("/List/Jobs/{column?}/{value?}")]
+
         public IActionResult Jobs(string column, string value)
         {
             List<Job> jobs;
+            string newValue = value;
+            if (newValue.Contains("%2F"))
+            {
+                newValue = newValue.Replace("%2F", "/");
+            }
             if (column.ToLower().Equals("all"))
             {
                 jobs = JobData.FindAll();
@@ -51,8 +58,8 @@ namespace TechJobsMVC.Controllers
             }
             else
             {
-                jobs = JobData.FindByColumnAndValue(column, value);
-                ViewBag.title = "Jobs with " + ColumnChoices[column] + ": " + value;
+                jobs = JobData.FindByColumnAndValue(column, newValue);
+                ViewBag.title = "Jobs with " + ColumnChoices[column] + ": " + newValue;
             }
             ViewBag.jobs = jobs;
 

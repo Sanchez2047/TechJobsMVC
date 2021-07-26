@@ -1,6 +1,6 @@
 ﻿<div class="container body-content">
 
-    <h1>@ViewBag.title</h1>
+    <h1>@ViewBag.title (@ViewBag.jobs.Count Results)</h1>
 
     @{
         //TODO #1: Use a loop to display job results in a table.
@@ -12,10 +12,16 @@
                 <th style="text-align:left">
                     ID: @job.Id<br />
                     Name: @job.Name<br />
+                    Employer: <a asp-controller="List" asp-action="Jobs" asp-route-column="employer" asp-route-value="@job.Employer">@job.Employer</a><br />
+                    Location: <a asp-controller="List" asp-action="Jobs" asp-route-column="location" asp-route-value="@job.Location">@job.Location</a><br />
+                    Position Type: <a asp-controller="List" asp-action="Jobs" asp-route-column="positionType" asp-route-value="@job.PositionType">@job.PositionType</a><br />
+                    Skill: <a asp-controller="List" asp-action="Jobs" asp-route-column="coreCompetency" asp-route-value="@job.CoreCompetency">@job.CoreCompetency</a><br />
+                    <!--ID: @job.Id<br />
+                    Name: @job.Name<br />
                     Employer: @job.Employer<br />
                     Location: @job.Location<br />
                     Position Type: @job.PositionType<br />
-                    Skill: @job.CoreCompetency<br />
+                    Skill: @job.CoreCompetency<br />-->
                 </th>
             </tr>
     }
